@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Javascript</title>
+    <style>
+        #tampil {
+            display: none;
+            padding: 10px;
+        }
+
+        #tampil span {
+            margin-bottom: 20px;
+            display: inline-block
+        }
+
+        #wrap {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        body {
+            width: 50%;
+            margin: auto;
+            font-family: Arial, Helvetica, sans-serif;
+            size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form Pendaftaran Mahasiswa</h1>
+    <div id="wrap">
+        <form action="" method="get" id="form">
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td><input type="text" name="nama" id="nama"></td>
+            </tr>
+            <br><br>
+            <tr>
+                 <td>Jenis Kelamin</td>
+                 <td>:</td>
+                 <td><input type="radio" name="jk" value="Pria" id="jk_pria"> Pria
+                 <input type="radio" name="jk" value="Wanita" id="jk_wanita"> Wanita</td>
+            </tr>
+            <br><br>
+            <tr>
+                 <td>Prodi</td>
+                 <td>:</td>
+                 <td><select name="prodi" id="prodi">
+                 <option value="Teknik Informatika">Teknik Informatika</option>
+                <option value="Sistem Informasi">Sistem Informasi</option>
+            </select></td>
+            </tr>
+             <br><br>
+            <tr>
+                 <td>Hobby</td>
+                 <td>:</td>
+                 <td><input type="checkbox" name="hobby" value="Coding"> coding
+                 <input type="checkbox" name="hobby" value="Jalan-jalan"> Jalan-jalan
+                 <input type="checkbox" name="hobby" value="Makan"> Makan</td>
+            </tr> 
+            <br><br>
+    
+            <button type="button" id="submit">Kirim</button>
+        </form>
+    
+        <br><br>
+        
+        <div id="tampil">
+            Nama: <span id="name_text"></span> <br>
+            Jenis Kelamin: <span id="jk_text"></span> <br>
+            prodi: <span id="prodi_text"></span> <br>
+            Hobby: <span id="hobby_text"></span> <br>
+        </div>
+    </div>
+
+    <script>
+        let btn_submit = document.getElementById("submit");
+
+        btn_submit.addEventListener('click', () => {
+            document.getElementById('tampil').style.display = "block";
+
+            // Get Name
+            let nama = document.getElementById('nama').value;
+            document.getElementById('name_text').innerHTML = nama;
+
+            // get JK length
+            let jk = document.getElementsByName('jk');
+            var len = jk.length;
+            for (var i = 0; i < len; i++) {
+                if (jk[i].type === 'radio') {
+                    if(jk[i].checked == true) {
+                        document.getElementById('jk_text').innerHTML = jk[i].value;
+                    }
+                }
+            }
+
+
+            // Get Prodi
+            let prodi = document.getElementById('prodi');
+            document.getElementById('prodi_text').innerHTML = prodi.value;
+            
+            // get hobby
+            var hobby = document.getElementsByName('hobby');
+            var len_hobby = hobby.length;
+            for (var i = 0; i < len_hobby; i++) {
+                if (hobby[i].type === 'checkbox') {
+                    if(hobby[i].checked == true) {
+                        let array = []
+                        array.push(hobby[i].value);
+                        array.forEach(a => {
+                            document.getElementById('hobby_text').append(a); 
+                            document.getElementById('hobby_text').append(', '); 
+                        })
+                    }
+                }
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
